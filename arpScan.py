@@ -7,19 +7,17 @@ from scapy.all import srp,Ether,ARP,conf
 conf.verb = 0
 
 def arp():
-    #try:
-	#interface = raw_input("[*] Enter Desired Interface: ")
-	#ips = raw_input("[*] Enter Range of IPs to Scan for: ")
-	
+    try:	
+	ips = raw_input("[*] Enter Range of IPs to Scan for: ")	
 
-    #except KeyboardInterrupt:
-	#print "\n[*] User Requested Shutdown"
-	#print "[*] Quitting..."
-	#sys.exit(1)
+    except KeyboardInterrupt:
+	print "\n[*] User Requested Shutdown"
+	print "[*] Quitting..."
+	sys.exit(1)
 
     print "\n[*] Scanning..."
     start_time = datetime.now()
-    ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = "192.168.2.0/24"),timeout=2)
+    ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = ips),timeout=2)
 
     print "MAC - IP\n"
     for snd,rcv in ans:
@@ -72,7 +70,7 @@ def checkText():
                 continue
             else:
                 while (1):
-                    option = raw_input("\n IP of The MAC address %s that is in your lan has changed. Do you want save this change ? (y/n): " %newMacs[i])
+                    option = raw_input("\n[*] IP of The MAC address %s that is in your lan has changed. Do you want save this change ? (y/n): " %newMacs[i])
                     if (option=="y" or option=="Y"):
                         text[newMacs[i]]=newText[newMacs[i]]
                         break
@@ -80,17 +78,17 @@ def checkText():
                         text[newMacs[i]]=oldText[newMacs[i]]
                         break
                     else:
-                        print ('Please Only Select "Y" or "N" Option!')
+                        print ('[*] Please Only Select "Y" or "N" Option!')
         else:
             while (1):
-                option = raw_input("\n Do you want save this device: %s to list ? (y/n): " %newMacs[i])
+                option = raw_input("\n[*] Do you want save this device: %s to list ? (y/n): " %newMacs[i])
                 if (option=="y" or option=="Y"):
                     text[newMacs[i]]=newText[newMacs[i]]
                     break
                 elif(option=="n" or option=="N"):
                     break
                 else:
-                    print ('Please Select Only "Y" or "N" Option !')
+                    print ('[*] Please Select Only "Y" or "N" Option !')
     createText(text)
     
     
