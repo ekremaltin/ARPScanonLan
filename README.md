@@ -20,6 +20,7 @@ Need to run the arpScan.py file with root privilages :
 
 ```javascript
   sudo python arpScan.py
+  enter your IP Range and lean back :)
 ```
 And here's some code! :thumbsup:
 
